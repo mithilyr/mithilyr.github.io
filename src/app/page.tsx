@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site, experience, education, certifications, projects, roles, ticker } from "@/content/site";
+import { site, experience, education, certifications, projects, otherProjects, universityProjects, roles, ticker } from "@/content/site";
 import Reveal from "@/components/Reveal";
 import Typing from "@/components/Typing";
 import Marquee from "@/components/Marquee";
@@ -132,6 +132,38 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          <h3 className="mb-4 mt-14 font-semibold">More projects</h3>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {otherProjects.map((p) => (
+              <li key={p.title} className="rounded-2xl border border-line p-5">
+                <p className="font-semibold">{p.title}</p>
+                <p className="mt-2 text-sm text-muted">{p.line}</p>
+                <p className="mt-3 flex flex-wrap gap-2 text-xs text-muted">
+                  {p.tags.map((t) => (
+                    <span key={t} className="rounded-full border border-line px-2 py-1">{t}</span>
+                  ))}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <details className="group mt-6 rounded-2xl border border-line p-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between font-semibold">
+              University projects
+              <span aria-hidden className="text-muted transition group-open:rotate-45">+</span>
+            </summary>
+            <div className="mt-4 grid gap-6 sm:grid-cols-3">
+              {Object.entries(universityProjects).reverse().map(([year, items]) => (
+                <div key={year}>
+                  <p className="mb-2 text-sm font-semibold">{year}</p>
+                  <ul className="space-y-2 text-sm text-muted">
+                    {items.map((i) => <li key={i}>{i}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </details>
         </Section>
 
         <Section id="github" title="GitHub">

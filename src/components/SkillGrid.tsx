@@ -1,7 +1,9 @@
 import {
   siPython, siTypescript, siNextdotjs, siFastapi, siQt, siThreedotjs, siPostgresql, siSupabase,
   siSqlalchemy, siDocker, siGithubactions, siCloudflare, siRender, siUv, siHuggingface, siOllama,
-  siClaude, siGooglegemini, siPytest, siRuff, siPenpot,
+  siClaude, siGooglegemini, siPytest, siRuff, siPenpot, siJavascript, siC, siPhp, siPandas, siNumpy,
+  siScikitlearn, siOpenrouter, siN8n, siModelcontextprotocol, siGit, siLinux, siJinja, siWordpress,
+  siWoocommerce, siArduino,
 } from "simple-icons";
 import { skills } from "@/content/site";
 
@@ -13,7 +15,10 @@ const icons: Record<string, Icon> = {
   SQLAlchemy: siSqlalchemy, Docker: siDocker, "GitHub Actions": siGithubactions,
   Cloudflare: siCloudflare, Render: siRender, uv: siUv, "Hugging Face": siHuggingface,
   Ollama: siOllama, "Claude Code": siClaude, Gemini: siGooglegemini, pytest: siPytest,
-  Ruff: siRuff, Penpot: siPenpot,
+  Ruff: siRuff, Penpot: siPenpot, JavaScript: siJavascript, C: siC, PHP: siPhp, pandas: siPandas,
+  NumPy: siNumpy, "scikit-learn": siScikitlearn, OpenRouter: siOpenrouter, n8n: siN8n,
+  MCP: siModelcontextprotocol, Git: siGit, Linux: siLinux, Jinja2: siJinja, WordPress: siWordpress,
+  WooCommerce: siWoocommerce, Arduino: siArduino,
 };
 
 export default function SkillGrid() {

@@ -8,11 +8,11 @@ export const site = {
   email: "rajapaksemithil@gmail.com",
   github: "https://github.com/mithilyr",
   linkedin: "https://lk.linkedin.com/in/mithilrajapakse",
-  resume: "", // set to "/resume.pdf" once the PDF is in public/ (button hides while empty)
+  resume: "/resume.pdf", // phone number removed; the button hides if this is empty
   // DRAFT, condensed from your LinkedIn summary
   photo: "/photo.png",
   about: [
-    "Math is where it all started for me, and electrical engineering was the natural extension: a field where math actually builds things. I'm a Curtin University student studying Electrical and Electronics Engineering, with a focus on applied AI, solar PV and embedded systems.",
+    "Math is where it all started for me, and electrical engineering was the natural extension: a field where math actually builds things. I'm a final-year Electrical and Electronics Engineering student at Curtin University Colombo, working across applied AI, solar PV and embedded systems.",
     "I get bored doing the same task twice, so I build tools that stop me repeating myself. At Hayleys Fentons I built a Python tool to automate solar Bill of Materials calculations and another to optimise panel string layouts, on my own initiative. My final-year research is on explainable AI, and I'm increasingly drawn to moving my career toward AI.",
   ],
 };
@@ -29,29 +29,29 @@ export const experience: Experience[] = [
   {
     role: "Engineer Intern",
     org: "Hayleys Fentons",
-    year: "Nov 2025 - Mar 2026",
+    year: "Nov 2025 - Feb 2026",
     detail:
       "Worked across utility-scale and industrial rooftop solar PV projects from 300 kW to 1.5 MW, at sites including Alumex Ekala, Captain Steel, Waguruwela Oil Mills and Femstar Packaging. Spotted a manual, error-prone Bill of Materials process and built a Python tool (Tkinter GUI and CLI) to automate it, with Excel export. On my own initiative I also built a combinatorial optimisation tool for solar panel string configurations that ranks layouts by installation practicality and inverter load balance.",
   },
   {
     role: "President",
     org: "Curtin Colombo Student Guild",
-    year: "2024 - 2025",
+    year: "Nov 2024 - Nov 2025",
     detail:
       "Elected head of the university's official student representative body, leading a team of over 150 students. I took on and solved multiple student welfare issues, created the Houses system for the university, and organised its first Sports Meet, Eclipse '25, from planning through execution.",
   },
   {
     role: "Assistant Treasurer",
     org: "Curtin Colombo Student Guild",
-    year: "2024",
+    year: "Nov 2023 - Nov 2024",
     detail:
       "Oversaw finances across the Guild's major campus events. Head of Finance for Unplugged 2024, the university's largest event, a concert, where I secured over LKR 1 million in sponsorships.",
   },
 ];
 
 export const education = [
-  { what: "BEng, Electrical and Electronics Engineering", where: "Curtin University", year: "2023 - 2027" },
-  { what: "Advanced Level, Mathematics", where: "Royal College Colombo", year: "2010 - 2023" },
+  { what: "BEng, Electrical and Electronics Engineering", where: "Curtin University Colombo", year: "2023 - present" },
+  { what: "Combined Mathematics, GCE A/L and O/L", where: "Royal College Colombo", year: "2011 - 2023" },
 ];
 export const certifications = [
   "AI Fundamentals with Claude",
@@ -61,16 +61,23 @@ export const certifications = [
   "Edexcel Advanced Subsidiary & Advanced Level",
 ];
 
-// Everything here is used in a repo above or listed on your profile.
+// From your CV and the repos above.
 export const skills: Record<string, string[]> = {
-  Languages: ["Python", "TypeScript"],
-  Frameworks: ["Next.js", "FastAPI", "PySide6", "Three.js"],
-  "Data & backend": ["PostgreSQL", "Supabase", "SQLAlchemy"],
-  "Cloud & DevOps": ["Docker", "GitHub Actions", "Cloudflare", "Render", "uv"],
-  "AI / ML": ["Hugging Face", "Ollama", "Claude Code", "Gemini"],
-  "Testing & quality": ["pytest", "Ruff"],
-  Design: ["Canva", "Penpot"],
-  Engineering: ["Solar PV design", "Embedded systems", "Excel reporting"],
+  Languages: ["Python", "TypeScript", "JavaScript", "C", "PHP", "Assembly"],
+  "AI & data": [
+    "RAG", "Graph retrieval", "Vector search", "LLM integration", "Explainable AI", "pandas", "NumPy",
+    "scikit-learn", "Hugging Face", "Ollama", "Gemini", "OpenRouter", "Claude Code", "n8n", "MCP",
+  ],
+  "Backend & DevOps": [
+    "FastAPI", "SQLAlchemy", "PostgreSQL", "Supabase", "REST APIs", "Docker", "Git", "GitHub Actions",
+    "Linux", "pytest", "Ruff", "Jinja2", "Cloudflare", "Render", "uv",
+  ],
+  Web: ["Next.js", "Three.js", "WordPress", "WooCommerce"],
+  "Electrical & embedded": [
+    "Arduino", "TI MSP430", "Embedded C", "MATLAB", "Quartus II", "Multisim", "LTspice", "AutoCAD",
+    "Circuit design", "Control systems",
+  ],
+  "Desktop & design": ["PySide6", "Tkinter", "Excel reporting", "Solar PV design", "Canva", "Penpot"],
   Leadership: ["Team leadership", "Sponsorship & finance", "Public relations"],
 };
 
@@ -207,5 +214,46 @@ export const roles = [
   "solar PV and embedded systems",
 ];
 export const ticker = [
-  "Python", "Applied AI", "Explainable AI", "Solar PV", "Embedded Systems", "Claude Code", "Tkinter",
+  "Python", "RAG", "Explainable AI", "Solar PV", "Embedded Systems", "FastAPI", "Claude Code", "Arduino",
 ];
+
+// Smaller projects from your CV. No numbers yet, so they get a line each instead of a case study.
+export const otherProjects = [
+  {
+    title: "Solar PV explainable-AI research",
+    line: "An explainable AI framework for solar PV fault diagnosis: a Python pipeline that classifies and interprets faults, so operations and maintenance teams can see why a decision was made. In progress.",
+    tags: ["Python", "pandas", "scikit-learn", "Explainability"],
+  },
+  {
+    title: "Graph-first RAG system",
+    line: "Built for the IFS challenge at SLIIT CODEFEST 2026: retrieval-augmented generation that tries graph retrieval first and falls back to vector search, with evidence-grounded answers and traceable provenance.",
+    tags: ["Python", "Embeddings", "Graph retrieval", "LLM orchestration"],
+  },
+  {
+    title: "CheckPoint",
+    line: "A full NFC and QR attendance system for university use: backend APIs, authentication, role-based access, and a data model for sessions, attendance, audits and room tracking.",
+    tags: ["FastAPI", "SQLAlchemy", "PostgreSQL", "Docker", "Jinja2"],
+  },
+  {
+    title: "Event Logistics Platform",
+    line: "A backend and frontend application for event logistics and coordination, with structured workflows, user roles and operational process modelling. Built for CV Boost 2026.",
+    tags: ["Full stack"],
+  },
+];
+
+export const universityProjects: Record<string, string[]> = {
+  "2026": ["Line follower robot: an autonomous Arduino-based robot with sensor input, motor control and embedded logic"],
+  "2025": [
+    "Terminal-based Snake game in C on Ubuntu",
+    "Eco-Play Tiles: a proposed low-carbon, oxygen-generating tile",
+    "8-bit CPU designed and tested with Quartus II logic gates",
+    "Op-amp circuits simulated in Multisim",
+    "Microcontroller LED control programmed in C and Assembly on a PCB",
+  ],
+  "2024": [
+    "Garden lifecycle simulator in Python on Linux",
+    "Arduino circuits designed and tested in LTspice",
+    "Statistical analysis of human reaction times in Excel",
+    "Sustainable garden for Saibai Island: a 3D design pitched as a food-sustainability solution",
+  ],
+};
