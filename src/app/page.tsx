@@ -137,7 +137,13 @@ export default function Home() {
           <ul className="grid gap-4 sm:grid-cols-2">
             {otherProjects.map((p) => (
               <li key={p.title} className="rounded-2xl border border-line p-5">
-                <p className="font-semibold">{p.title}</p>
+                <p className="font-semibold">
+                  {p.href ? (
+                    <a href={p.href} className="underline decoration-line underline-offset-4 hover:decoration-fg">{p.title} ↗</a>
+                  ) : (
+                    p.title
+                  )}
+                </p>
                 <p className="mt-2 text-sm text-muted">{p.line}</p>
                 <p className="mt-3 flex flex-wrap gap-2 text-xs text-muted">
                   {p.tags.map((t) => (

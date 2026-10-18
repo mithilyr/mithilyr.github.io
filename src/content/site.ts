@@ -174,8 +174,62 @@ export const projects: Project[] = [
     ],
     notes: [
       "The designathon file (Penpot) is the base; every departure from it is documented in the repo.",
-      "This page covers the hackathon system. The datathon entry is a separate piece of work.",
+      "This page covers the hackathon system. The datathon entry has its own page.",
       "Hosted on Render's free tier, so the first load can take 30 to 60 seconds.",
+    ],
+  },
+  {
+    slug: "waypoint-datathon",
+    title: "Waypoint Datathon",
+    blurb:
+      "The data science stage of Tech-Triathlon 2026 for Waypoint Group: predict delivery service times and lateness, forecast weekly demand, and allocate a fleet on the busiest day.",
+    stats: [
+      { value: "3.85 vs 5.28", label: "min service-time error vs baseline" },
+      { value: "4.9% vs 5.9%", label: "weekly demand error vs best baseline" },
+      { value: "75 of 85", label: "peak-day orders allocated" },
+    ],
+    tags: ["Python", "LightGBM", "scikit-learn", "Integer programming"],
+    problem:
+      "Waypoint Group's delivery data was confidential, so the work had to be reproducible without ever committing it. The challenge had three tasks: predict how long each delivery stop takes and whether it will be late, forecast weekly demand, and decide which orders to serve when the fleet can't carry them all.",
+    built: [
+      "A data layer that cleans the raw tables and builds the labels itself: service time is departure minus the later of arrival and window open, and lateness is arrival after the window closes.",
+      "Task 1: LightGBM for service time and a calibrated classifier for lateness, trained on 5,014 deliveries and validated on the newest 42 days rather than random folds.",
+      "Task 2A: a Ridge and LightGBM blend forecasting weekly total and chilled volume per depot and brand, checked with rolling-origin validation.",
+      "Task 2B: an exact integer-programming packing of chilled orders onto reefer trucks, which served 10 of 10 orders deferred the day before and passed the organisers' checker.",
+      "A one-page prioritisation policy and a full notebook that runs the whole pipeline top to bottom.",
+    ],
+    notes: [
+      "Time-based validation only. Features use planned times, so nothing from the future leaks into a prediction.",
+      "Rules followed: no pre-trained models, no LLM or cloud APIs, no AutoML. The AI-assistance disclosure is written up in the repo.",
+      "Team project with Team Git Gud. My part was the data layer, the preprocessing write-up, the Task 2B policy and the submission.",
+      "The competition data is confidential, so the repository is private and the page shows only results.",
+    ],
+  },
+  {
+    slug: "cv-boost-route",
+    title: "CV Boost 2026: Route and Scan",
+    blurb:
+      "Digital route cards and event-day QR check-in for the CV Boost 2026 career fair at Curtin University Colombo: three small web pages on a Supabase backend.",
+    stats: [
+      { value: "3", label: "standalone pages, no build step" },
+      { value: "8", label: "scan outcomes handled" },
+      { value: "50-bit", label: "random, non-sequential QR tokens" },
+    ],
+    tags: ["JavaScript", "Supabase", "Postgres RLS", "QR codes"],
+    repo: "https://github.com/mithilyr/cvboost-route",
+    problem:
+      "A career fair needs every delegate to visit the right company booth at the right time, and the committee needs proof they did. We needed that working on phones, over a shaky venue network, without building a whole app.",
+    built: [
+      "A delegate page with their schedule, a QR code, live status and a floor plan, with no sign-in.",
+      "A booth scanner for committee members that reads the QR token, queues scans in the browser when offline, and retries safely.",
+      "An organiser console with a live board, delegate search, a drag-and-drop floor-plan editor and CSV export.",
+      "Postgres row-level security with every write going through a database function, so a booth station can only ever act for its own company.",
+      "Scan results (valid, early, late, wrong company, duplicate and more) that record what happened instead of blocking a real conversation.",
+    ],
+    notes: [
+      "A unique constraint on delegate and company makes duplicate attendance impossible, and every scan carries an idempotency key so a replay is harmless.",
+      "The Supabase key in the pages is a publishable one, meant to be public. Anonymous callers can't read attendance data or record scans.",
+      "Each file is self-contained, so they can be dropped into the branch website's public folder.",
     ],
   },
   {
@@ -235,9 +289,10 @@ export const otherProjects = [
     tags: ["FastAPI", "SQLAlchemy", "PostgreSQL", "Docker", "Jinja2"],
   },
   {
-    title: "Event Logistics Platform",
-    line: "A backend and frontend application for event logistics and coordination, with structured workflows, user roles and operational process modelling. Built for CV Boost 2026.",
-    tags: ["Full stack"],
+    title: "IEEE Day 2026: The Ember",
+    line: "An interactive prototype of the IEEE Day 2026 experience for the branch: a narrative page with nomination, recognition wall, memory vault, time capsule and a build-your-idea flow, each reachable from a QR code. Built to show the Executive Committee.",
+    tags: ["Next.js", "TypeScript", "Vercel"],
+    href: "https://ieee-day-2026.vercel.app",
   },
 ];
 
