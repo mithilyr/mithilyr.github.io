@@ -44,7 +44,7 @@ function DivisionHead({ n, label, title, sub, calligraphic = false }: { n: strin
   );
 }
 
-const tileColour = ["d-orange", "d-ai", "d-gold", "d-orange"];
+const tileColour = ["d-orange", "d-ai", "d-gold", "d-orange", "d-ai", "d-gold", "d-orange"];
 
 export default function Home() {
   const [first, ...rest] = site.name.split(" ");

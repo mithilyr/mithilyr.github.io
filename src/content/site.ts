@@ -124,11 +124,66 @@ const dshot = (slug: string, name: string, w: number, h: number, caption: string
 });
 export const design: DesignWork[] = [
   {
+    slug: "ieee-events",
+    tag: "Event and announcement posters",
+    title: "IEEE event posters",
+    blurb:
+      "Posters for the IEEE Student Branch of Curtin University Colombo, as founding Head of Public Relations: the 3D Art Expo, the onboarding session, Brews & Brainstorms, IEEE Day 2026 and its leadership panel, the DetectX competition, the AI & Computer Vision organising committee call, and the Inaugural Annual General Meeting.",
+    skills: ["Canva", "Event posters", "Social graphics"],
+    items: [
+      dshot("ieee-events", "ieee-day", 1080, 1350, "IEEE Day 2026: \"Join us\", free entry, 15 October 2026 at Curtin University Colombo."),
+      dshot("ieee-events", "beyond-engineering", 1080, 1350, "IEEE Beyond Engineering: a panel on IEEE volunteering and leadership for IEEE Day 2026, 13 October 2026."),
+      dshot("ieee-events", "3d-art-expo-2", 1080, 1350, "3D Art Expo, 8 to 10 March 2026: an exhibition with interactive workshops."),
+      dshot("ieee-events", "3d-art-expo-1", 1080, 1350, "3D Art Expo: the teaser for the one-day session on 17 March."),
+      dshot("ieee-events", "onboarding", 1080, 1350, "Onboarding Session for freshers and current students, 28 July 2026."),
+      dshot("ieee-events", "brews", 1080, 1350, "Introducing Brews & Brainstorms: the branch's casual brainstorming series."),
+      dshot("ieee-events", "detectx", 1080, 1350, "DetectX, \"see beyond pixels\": a two-phase competition (8 and 16 May)."),
+      dshot("ieee-events", "ai-cv-oc", 1080, 1350, "AI & Computer Vision 2026: the call for organising committee applications."),
+      dshot("ieee-events", "agm", 1080, 1350, "The Inaugural Annual General Meeting, 22 November 2025."),
+    ],
+  },
+  {
+    slug: "cv-boost-booklet",
+    tag: "Campaign and event booklet",
+    title: "CV Boost: campaign and booklet",
+    blurb:
+      "The campaign and the delegate booklet for CV Boost 2026, the IEEE Student Branch's career-readiness programme at Curtin University Colombo: the launch poster, the guest speaker panel, registrations open and closed, and a programme guide with welcome, event snapshot and outcomes. The same event the Route and Scan system was built for.",
+    skills: ["Canva", "Layout", "Event branding"],
+    items: [
+      dshot("cv-boost-booklet", "campaign-intro", 1080, 1350, "Introducing CV Boost: two sessions to prepare, a final session to secure your first job."),
+      dshot("cv-boost-booklet", "campaign-open", 1080, 1350, "Registrations open: Build. Refine. Connect. Get hired. 29 August to 4 September."),
+      dshot("cv-boost-booklet", "campaign-speakers", 1080, 1350, "Introducing the guest speaker panel and the two phases."),
+      dshot("cv-boost-booklet", "campaign-closed", 1080, 1350, "Registrations officially closed, with the event timeline and the industry partners."),
+      dshot("cv-boost-booklet", "cvboost-1", 1280, 905, "The delegate booklet cover: a three-phase career development programme."),
+      dshot("cv-boost-booklet", "cvboost-2", 1280, 905, "The booklet's welcome page: why CV Boost exists and who hosts it."),
+      dshot("cv-boost-booklet", "cvboost-3", 1280, 905, "The event snapshot: participants, phases, CVs submitted and reviewed, and industry partners."),
+      dshot("cv-boost-booklet", "cvboost-4", 1280, 905, "Five outcomes for delegates, from better CVs to stronger industry links."),
+    ],
+  },
+  {
+    slug: "membership-merch",
+    tag: "Membership, merch and recruitment",
+    title: "Membership, merch and recruitment",
+    blurb:
+      "Campaigns that grow the branch: the Membership Drive, the branch polo from \"Procure\" and \"First batch arrives\" to the second batch and the \"Wear our merch\" pre-order push, and the recruitment posters for the PR Committee and a video editor.",
+    skills: ["Canva", "Campaign design", "Typography"],
+    items: [
+      dshot("membership-merch", "membership-drive", 1080, 1350, "Membership Drive: the branch's membership campaign."),
+      dshot("membership-merch", "procure", 1080, 1350, "Procure: the teaser for the IEEE Student Branch polo."),
+      dshot("membership-merch", "first-batch", 1080, 1350, "First batch arrives, 23 February 2026: pre-orders open for the polo."),
+      dshot("membership-merch", "merch-batch-2", 1080, 1350, "Official Merch, Batch #0002: the polo campaign, 39% sold out."),
+      dshot("membership-merch", "wear-our-merch", 1080, 1350, "Wear our merch and represent: pre-orders open from the link."),
+      dshot("membership-merch", "pr-recruit-1", 1080, 1350, "PR Committee recruitment, poster one."),
+      dshot("membership-merch", "pr-recruit-2", 1080, 1350, "PR Committee recruitment, poster two."),
+      dshot("membership-merch", "video-editor", 1080, 1350, "We are looking for a video editor: the recruitment poster."),
+    ],
+  },
+  {
     slug: "ieee-publicity",
     tag: "Technical and symposium publicity",
     title: "IEEE chapter publicity",
     blurb:
-      "Carousels, decks and announcements for the IEEE Student Branch of Curtin University Colombo, as founding Head of Public Relations: a guide to the IEEE societies, the membership presentation, and the branch's presence on Instagram, LinkedIn, YouTube and Facebook.",
+      "Carousels and decks for the branch: a guide to the IEEE societies and the membership presentation, alongside the branch's presence on Instagram, LinkedIn, YouTube and Facebook.",
     skills: ["Canva", "Instagram", "YouTube", "Facebook"],
     items: [
       dshot("ieee-publicity", "ieee-societies-1", 1080, 1350, "Find Your IEEE Community: a swipe carousel introducing the six societies and affinity groups."),
@@ -137,6 +192,20 @@ export const design: DesignWork[] = [
       dshot("ieee-publicity", "ieee-societies-4", 1080, 1350, "Society spotlight: the IEEE Aerospace and Electronic Systems Society."),
       dshot("ieee-publicity", "ieee-deck-1", 1280, 720, "Cover of the introduction session for the IEEE Student Branch of Curtin University Colombo."),
       dshot("ieee-publicity", "ieee-deck-2", 1280, 720, "From the membership presentation: where IEEE began (1884, 1912, 1963)."),
+    ],
+  },
+  {
+    slug: "greetings",
+    tag: "Greetings and awareness days",
+    title: "Greetings and awareness days",
+    blurb:
+      "Seasonal and awareness-day graphics for the branch's social channels, from Merry Christmas and Mother's Day to the International Day of Women and Girls in Science.",
+    skills: ["Canva", "Social graphics", "Typography"],
+    items: [
+      dshot("greetings", "women-in-science", 1080, 1350, "International Day of Women and Girls in Science: \"Talent has no gender. Innovation has no limits.\""),
+      dshot("greetings", "christmas", 1080, 1350, "Merry Christmas: a line-art greeting."),
+      dshot("greetings", "easter", 1080, 1350, "Happy Easter: a floral cross greeting."),
+      dshot("greetings", "mothers-day", 1080, 1350, "Happy Mother's Day: a retro collage greeting."),
     ],
   },
   {
@@ -153,20 +222,6 @@ export const design: DesignWork[] = [
       dshot("student-guild", "ccsg-1", 1280, 720, "Curtin Colombo Student Guild 25/26: the cover slide."),
       dshot("student-guild", "guild-1", 1280, 720, "The Executive Board 2026 application booklet: the cover."),
       dshot("student-guild", "guild-2", 1280, 720, "The application booklet: the welcome letter to applicants."),
-    ],
-  },
-  {
-    slug: "cv-boost-booklet",
-    tag: "Event booklet",
-    title: "CV Boost delegate booklet",
-    blurb:
-      "The delegate booklet for CV Boost 2026, the IEEE Student Branch's career-readiness programme at Curtin University Colombo: welcome, event snapshot and outcomes in a clean programme guide. The same event the Route and Scan system was built for.",
-    skills: ["Canva", "Layout", "Event branding"],
-    items: [
-      dshot("cv-boost-booklet", "cvboost-1", 1280, 905, "The booklet cover: a three-phase career development programme."),
-      dshot("cv-boost-booklet", "cvboost-2", 1280, 905, "The welcome page: why CV Boost exists and who hosts it."),
-      dshot("cv-boost-booklet", "cvboost-3", 1280, 905, "The event snapshot: participants, phases, CVs submitted and reviewed, and industry partners."),
-      dshot("cv-boost-booklet", "cvboost-4", 1280, 905, "Five outcomes for delegates, from better CVs to stronger industry links."),
     ],
   },
   {
