@@ -24,7 +24,7 @@ export default function SectionIndex() {
           key={id}
           href={`#${id}`}
           aria-label={id}
-          className={`h-2.5 w-2.5 rounded-full border border-fg transition-all ${
+          className={`h-2.5 w-2.5 border-2 border-fg transition-all ${
             active === id ? "scale-125 bg-accent" : "bg-transparent"
           }`}
         />

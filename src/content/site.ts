@@ -63,26 +63,30 @@ export const certifications = [
 
 // From your CV and the repos above.
 export const skills: Record<string, string[]> = {
-  Languages: ["Python", "TypeScript", "JavaScript", "C", "PHP", "Assembly"],
+  Languages: ["Python", "JavaScript", "C", "Assembly"],
   "AI & data": [
     "RAG", "Graph retrieval", "Vector search", "LLM integration", "Explainable AI", "pandas", "NumPy",
     "scikit-learn", "Hugging Face", "Ollama", "Gemini", "OpenRouter", "Claude Code", "n8n", "MCP",
   ],
   "Backend & DevOps": [
-    "FastAPI", "SQLAlchemy", "PostgreSQL", "Supabase", "REST APIs", "Docker", "Git", "GitHub Actions",
+    "FastAPI", "PostgreSQL", "Supabase", "REST APIs", "Docker", "Git", "GitHub Actions",
     "Linux", "pytest", "Ruff", "Jinja2", "Cloudflare", "Render", "uv",
   ],
-  Web: ["Next.js", "Three.js", "WordPress", "WooCommerce"],
+  Web: ["Next.js", "Three.js", "WordPress"],
   "Electrical & embedded": [
     "Arduino", "TI MSP430", "Embedded C", "MATLAB", "Quartus II", "Multisim", "LTspice", "AutoCAD",
     "Circuit design", "Control systems",
   ],
-  "Desktop & design": ["PySide6", "Tkinter", "Excel reporting", "Solar PV design", "Canva", "Penpot"],
+  "Desktop & design": ["Tkinter", "Excel reporting", "Solar PV design", "Canva", "Penpot"],
   Leadership: ["Team leadership", "Sponsorship & finance", "Public relations"],
 };
 
+export type Domain = "solar" | "ai" | "web" | "data";
+export const domainLabel: Record<Domain, string> = { solar: "Solar PV", ai: "AI & NLP", web: "Web & systems", data: "Data science" };
+
 export type Project = {
   slug: string;
+  domain: Domain;
   title: string;
   blurb: string;
   stats: { value: string; label: string }[]; // exactly 3, real numbers only
@@ -98,6 +102,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "solar-pv-designer",
+    domain: "solar",
     title: "Solar PV Designer",
     blurb:
       "A free Windows app for rooftop solar engineers: give it the roof layout and inverters, and it produces the bill of materials, the string design and guideline checks in one Excel workbook.",
@@ -125,6 +130,7 @@ export const projects: Project[] = [
   },
   {
     slug: "laya-lk-bench",
+    domain: "ai",
     title: "Does Laya read Sinhala and Tamil?",
     blurb:
       "A pre-registered, reproducible stress test of the open Laya decision model on Sinhala and Tamil offensive-language data, with an English control.",
@@ -152,6 +158,7 @@ export const projects: Project[] = [
   },
   {
     slug: "waypoint-delivery",
+    domain: "web",
     title: "Waypoint Delivery System",
     blurb:
       "A hackathon system connecting order, plan, load, deliver and receipt for four roles: dispatcher, loader, driver and store manager. Works offline for drivers.",
@@ -180,6 +187,7 @@ export const projects: Project[] = [
   },
   {
     slug: "waypoint-datathon",
+    domain: "data",
     title: "Waypoint Datathon",
     blurb:
       "The data science stage of Tech-Triathlon 2026 for Waypoint Group: predict delivery service times and lateness, forecast weekly demand, and allocate a fleet on the busiest day.",
@@ -207,6 +215,7 @@ export const projects: Project[] = [
   },
   {
     slug: "cv-boost-route",
+    domain: "web",
     title: "CV Boost 2026: Route and Scan",
     blurb:
       "Digital route cards and event-day QR check-in for the CV Boost 2026 career fair at Curtin University Colombo: three small web pages on a Supabase backend.",
@@ -234,6 +243,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ieee-sponsorship-companion",
+    domain: "web",
     title: "IEEE Sponsorship Companion",
     blurb:
       "A free tool that helps the IEEE student branch chase sponsors for its 20+ events a year, so a new committee inherits the history instead of losing track of who was asked.",
@@ -274,22 +284,30 @@ export const ticker = [
 // Smaller projects from your CV. No numbers yet, so they get a line each instead of a case study.
 export const otherProjects = [
   {
+    slug: "xai-research",
     title: "Solar PV explainable-AI research",
+    domain: "solar" as Domain,
     line: "An explainable AI framework for solar PV fault diagnosis: a Python pipeline that classifies and interprets faults, so operations and maintenance teams can see why a decision was made. In progress.",
     tags: ["Python", "pandas", "scikit-learn", "Explainability"],
   },
   {
+    slug: "graph-rag",
     title: "Graph-first RAG system",
+    domain: "ai" as Domain,
     line: "Built for the IFS challenge at SLIIT CODEFEST 2026: retrieval-augmented generation that tries graph retrieval first and falls back to vector search, with evidence-grounded answers and traceable provenance.",
     tags: ["Python", "Embeddings", "Graph retrieval", "LLM orchestration"],
   },
   {
+    slug: "checkpoint",
     title: "CheckPoint",
+    domain: "web" as Domain,
     line: "A full NFC and QR attendance system for university use: backend APIs, authentication, role-based access, and a data model for sessions, attendance, audits and room tracking.",
     tags: ["FastAPI", "SQLAlchemy", "PostgreSQL", "Docker", "Jinja2"],
   },
   {
+    slug: "ember",
     title: "IEEE Day 2026: The Ember",
+    domain: "web" as Domain,
     line: "An interactive prototype of the IEEE Day 2026 experience for the branch: a narrative page with nomination, recognition wall, memory vault, time capsule and a build-your-idea flow, each reachable from a QR code. Built to show the Executive Committee.",
     tags: ["Next.js", "TypeScript", "Vercel"],
     href: "https://ieee-day-2026.vercel.app",

@@ -21,39 +21,60 @@ const icons: Record<string, Icon> = {
   WooCommerce: siWoocommerce, Arduino: siArduino,
 };
 
+// Colour per skill group; groups longer than SHOW fold the rest into a "+N more" disclosure.
+const groupColour = ["d-solar", "d-ai", "d-web", "d-data", "d-solar", "d-ai", "d-web"];
+const SHOW = 8;
+
+function Chip({ name }: { name: string }) {
+  const icon = icons[name];
+  return (
+    <li className="skill-chip group flex items-center gap-2 border border-line px-3 py-1.5 text-sm">
+      {icon && (
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden
+          className="shrink-0 fill-current text-muted transition group-hover:text-[var(--brand)]"
+          style={{ ["--brand" as string]: `#${icon.hex}` }}
+        >
+          <path d={icon.path} />
+        </svg>
+      )}
+      {name}
+    </li>
+  );
+}
+
 export default function SkillGrid() {
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {Object.entries(skills).map(([group, items]) => (
-        <div key={group}>
-          <h3 className="mb-3 font-semibold">{group}</h3>
-          <ul className="flex flex-wrap gap-2">
-            {items.map((name) => {
-              const icon = icons[name];
-              return (
-                <li
-                  key={name}
-                  className="group flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-sm transition hover:border-fg"
-                >
-                  {icon && (
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      aria-hidden
-                      className="shrink-0 fill-current text-muted transition group-hover:text-[var(--brand)]"
-                      style={{ ["--brand" as string]: `#${icon.hex}` }}
-                    >
-                      <path d={icon.path} />
-                    </svg>
-                  )}
-                  {name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ))}
+    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {Object.entries(skills).map(([group, items], gi) => {
+        const head = items.slice(0, SHOW);
+        const more = items.slice(SHOW);
+        return (
+          <div key={group} className={groupColour[gi % groupColour.length]}>
+            <h3 className="mb-4 flex items-center gap-2 font-semibold">
+              <span className="h-2 w-2" style={{ background: "var(--dc)" }} aria-hidden />
+              {group}
+            </h3>
+            <ul className="flex flex-wrap gap-2">
+              {head.map((name) => <Chip key={name} name={name} />)}
+            </ul>
+            {more.length > 0 && (
+              <details className="group/more mt-2">
+                <summary className="cursor-pointer list-none text-sm text-muted transition hover:text-[var(--dc)]">
+                  <span className="group-open/more:hidden">+ {more.length} more</span>
+                  <span className="hidden group-open/more:inline">Show less</span>
+                </summary>
+                <ul className="mt-2 flex flex-wrap gap-2">
+                  {more.map((name) => <Chip key={name} name={name} />)}
+                </ul>
+              </details>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

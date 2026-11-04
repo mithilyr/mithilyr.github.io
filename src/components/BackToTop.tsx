@@ -15,7 +15,7 @@ export default function BackToTop() {
       onClick={() =>
         scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
       }
-      className={`fixed bottom-6 right-6 z-40 h-11 w-11 rounded-full border border-fg bg-bg text-lg transition hover:bg-accent hover:text-black ${
+      className={`fixed bottom-6 right-6 z-40 h-11 w-11 border-2 border-accent bg-bg text-lg transition hover:bg-accent hover:text-black ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >

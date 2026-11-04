@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import Nav from "@/components/Nav";
@@ -9,6 +9,11 @@ import BackToTop from "@/components/BackToTop";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
+  subsets: ["latin"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jb",
   subsets: ["latin"],
 });
 
@@ -23,12 +28,12 @@ const themeScript = `try{var t=localStorage.getItem("theme");if(t)document.docum
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={spaceGrotesk.variable} suppressHydrationWarning>
+    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-screen antialiased">
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-black">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-accent focus:px-3 focus:py-2 focus:text-black">
           Skip to content
         </a>
         <SmoothScroll />
@@ -37,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Nav />
         {children}
         <BackToTop />
-        <footer className="border-t border-line px-4 pb-24 pt-8 text-center text-sm text-muted">
+        <footer className="border-t-2 border-line px-4 pb-24 pt-8 text-center text-sm text-muted">
           {site.name} · {site.location} ·{" "}
           <a href={site.github} className="underline">GitHub</a> ·{" "}
           <a href={site.linkedin} className="underline">LinkedIn</a>

@@ -31,7 +31,6 @@ export default async function GithubActivity() {
   const data = await load();
   if (!data) return <p className="text-muted">GitHub activity is unavailable right now. <a className="underline" href={site.github}>See the profile ↗</a></p>;
   const repos = data.repos.filter((r) => !r.fork);
-  const stars = repos.reduce((n, r) => n + r.stargazers_count, 0);
   const langs = new Map<string, number>();
   repos.forEach((r) => r.language && langs.set(r.language, (langs.get(r.language) ?? 0) + 1));
   const top = [...langs.entries()].sort((a, b) => b[1] - a[1]);
@@ -39,23 +38,18 @@ export default async function GithubActivity() {
 
   return (
     <div>
-      <dl className="grid grid-cols-3 gap-4 border-y border-line py-6">
-        {[
-          [data.user.public_repos, "public repos"],
-          [stars, "stars earned"],
-          [data.user.followers, "followers"],
-        ].map(([v, l]) => (
-          <div key={l as string}>
-            <dt className="text-3xl font-bold">{v}</dt>
-            <dd className="text-sm text-muted">{l}</dd>
-          </div>
-        ))}
-      </dl>
+      <p className="border-y border-line py-6 text-lg">
+        <span className="text-3xl font-bold text-accent">{data.user.public_repos}</span>{" "}
+        <span className="text-muted">public repos, most recently active below</span>
+      </p>
       {top.length > 0 && (
         <div className="mt-6">
-          <div className="flex h-2 overflow-hidden rounded-full bg-line" aria-hidden>
+          <div className="flex h-2 overflow-hidden bg-line" aria-hidden>
             {top.map(([lang, c], i) => (
-              <span key={lang} style={{ width: `${(c / total) * 100}%`, opacity: 1 - i * 0.2 }} className="bg-accent" />
+              <span
+                key={lang}
+                style={{ width: `${(c / total) * 100}%`, background: ["var(--accent)", "var(--gold)", "var(--c-ai)", "var(--c-web)"][i % 4] }}
+              />
             ))}
           </div>
           <p className="mt-2 text-sm text-muted">{top.map(([l, c]) => `${l} ${Math.round((c / total) * 100)}%`).join(" · ")}</p>
@@ -64,11 +58,11 @@ export default async function GithubActivity() {
       <ul className="mt-8 grid gap-4 sm:grid-cols-3">
         {repos.slice(0, 3).map((r) => (
           <li key={r.name}>
-            <a href={r.html_url} className="block h-full rounded-2xl border border-line p-5 hover:border-fg">
+            <a href={r.html_url} className="mini-card win d-ai block h-full">
               <p className="font-semibold">{r.name}</p>
               <p className="mt-2 text-sm text-muted">{r.description ?? "No description yet"}</p>
               <p className="mt-4 text-xs text-muted">
-                {r.language ?? "n/a"} · ★ {r.stargazers_count} · updated {new Date(r.pushed_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                {r.language ?? "n/a"} · updated {new Date(r.pushed_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
               </p>
             </a>
           </li>

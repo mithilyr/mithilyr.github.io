@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { projects } from "@/content/site";
+import { projects, domainLabel } from "@/content/site";
+import ProjectArt from "@/components/ProjectArt";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -18,15 +19,20 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
   const p = projects.find((x) => x.slug === slug);
   if (!p) notFound();
   return (
-    <main id="main" className="mx-auto max-w-3xl px-4 py-16">
+    <main id="main" className={`mx-auto max-w-3xl px-4 py-16 d-${p.domain}`}>
       <Link href="/#work" className="text-sm text-muted hover:underline">← Back</Link>
-      <h1 className="mt-6 text-5xl font-bold">{p.title}</h1>
+      <p className="tag mt-6 block w-fit uppercase tracking-widest">{domainLabel[p.domain]}</p>
+      <h1 className="mt-4 text-5xl font-bold">{p.title}</h1>
       <p className="mt-4 text-xl text-muted">{p.blurb}</p>
+
+      <div className="art-frame win win-on">
+        <ProjectArt slug={p.slug} fit="meet" />
+      </div>
 
       <dl className="mt-10 grid grid-cols-3 gap-4 border-y border-line py-6">
         {p.stats.map((s, i) => (
           <div key={i}>
-            <dt className="text-2xl font-bold sm:text-3xl">{s.value}</dt>
+            <dt className="stat-val text-2xl font-bold sm:text-3xl">{s.value}</dt>
             <dd className="mt-1 text-xs text-muted sm:text-sm">{s.label}</dd>
           </div>
         ))}
@@ -47,12 +53,12 @@ export default async function CaseStudy({ params }: PageProps<"/work/[slug]">) {
 
       <p className="mt-12 flex flex-wrap gap-3 text-sm">
         {p.repo ? (
-          <a href={p.repo} className="rounded-full border border-fg px-5 py-2 hover:bg-accent hover:text-black">Code on GitHub ↗</a>
+          <a href={p.repo} className="btn-solid">Code on GitHub ↗</a>
         ) : (
-          <span className="rounded-full border border-line px-5 py-2 text-muted">Private repository</span>
+          <span className="mono border-2 border-line px-5 py-3 text-xs uppercase tracking-wider text-muted">Private repository</span>
         )}
         {p.live && (
-          <a href={p.live} className="rounded-full border border-fg px-5 py-2 hover:bg-accent hover:text-black">Live demo ↗</a>
+          <a href={p.live} className="btn-ghost">Live demo ↗</a>
         )}
       </p>
       <p className="mt-4 text-sm text-muted">{p.tags.join(" · ")}</p>

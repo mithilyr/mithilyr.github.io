@@ -13,7 +13,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Toggle theme"
-      className="h-9 w-9 rounded-full border border-line text-sm hover:bg-line"
+      className="h-9 w-9 border-2 border-line text-sm hover:border-accent hover:text-accent"
     >
       <svg viewBox="0 0 24 24" width="16" height="16" className="mx-auto" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" /></svg>
     </button>

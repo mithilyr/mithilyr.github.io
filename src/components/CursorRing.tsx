@@ -35,7 +35,9 @@ export default function CursorRing() {
     <div
       ref={ring}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[60] hidden h-8 w-8 rounded-full border-2 border-accent opacity-0 transition-[opacity,scale] duration-200 [@media(pointer:fine)]:block"
-    />
+      className="round-ok pointer-events-none fixed left-0 top-0 z-[60] hidden h-8 w-8 border-2 border-accent opacity-0 transition-[opacity,scale] duration-200 [@media(pointer:fine)]:block"
+    >
+      <span className="round-ok absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 bg-accent" />
+    </div>
   );
 }

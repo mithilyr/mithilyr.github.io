@@ -4,17 +4,30 @@
   --bg: #f6f1e4;
   --fg: #141414;
   --muted: #6b665a;
-  --line: #e0d9c6;
+  --line: #cfc6ad;
   --grid: #d9d1b8;
   --accent: #f97316;
+  --gold: #e8a000;
+  /* domain colours: one per kind of work */
+  --c-solar: #d97706;
+  --c-ai: #0891b2;
+  --c-web: #4d7c0f;
+  --c-data: #db2777;
+  --surface: rgba(20, 20, 20, .03);
 }
 [data-theme="dark"] {
-  --bg: #121210;
+  --bg: #0b0b0a;
   --fg: #f1ecdc;
-  --muted: #9b9684;
-  --line: #2a2924;
-  --grid: #34332c;
-  --accent: #f97316;
+  --muted: #a29d8a;
+  --line: #34332c;
+  --grid: #26251f;
+  --accent: #ff7a1a;
+  --gold: #ffc233;
+  --c-solar: #fbbf24;
+  --c-ai: #22d3ee;
+  --c-web: #a3e635;
+  --c-data: #f472b6;
+  --surface: rgba(255, 255, 255, .035);
 }
 
 @theme inline {
@@ -24,7 +37,11 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-jb);
 }
+
+/* Hyprland look: nothing is ever rounded. */
+*, *::before, *::after { border-radius: 0 !important; }
 
 html { scroll-behavior: smooth; }
 body {
@@ -32,19 +49,31 @@ body {
   color: var(--fg);
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
+::selection { background: var(--accent); color: #0b0b0a; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+}
+
+/* Square scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line); border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Monospace for all the "chrome" text (labels, tags, buttons, bar) */
+.mono, .eyebrow, .tag, .skill-chip, .status-chip, .btn-solid, .btn-ghost, .work-kind, .xp-year, .bar-link, footer {
+  font-family: var(--font-jb), ui-monospace, monospace;
 }
 
 /* Scroll reveal */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .reveal-in { opacity: 1; transform: none; }
 
-/* Typing caret + pulsing status dot */
-.caret { display: inline-block; width: 2px; height: 1em; margin-left: 2px; background: currentColor; vertical-align: -0.12em; animation: blink 1s steps(1) infinite; }
+/* Typing caret + pulsing status square */
+.caret { display: inline-block; width: .55em; height: 1em; margin-left: 2px; background: currentColor; vertical-align: -0.12em; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.pulse-dot { display: inline-block; height: 8px; width: 8px; border-radius: 9999px; background: #22c55e; animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 50% { opacity: .35; transform: scale(.8); } }
+.pulse-dot { display: inline-block; height: 8px; width: 8px; background: #22c55e; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
 
 /* Marquee */
 .marquee { animation: marquee 30s linear infinite; }
@@ -61,6 +90,168 @@ body {
   background-size: auto, 56px 56px, 56px 56px;
   mask-image: linear-gradient(#000 70%, transparent);
 }
+
+/* ---------- colour system ---------- */
+.d-solar { --dc: var(--c-solar); }
+.d-ai { --dc: var(--c-ai); }
+.d-web { --dc: var(--c-web); }
+.d-data { --dc: var(--c-data); }
+
+/* Hero: ambient orange/gold behind the globe */
+.hero-grid::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(40% 45% at 85% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(35% 40% at 70% 90%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 70%),
+    radial-gradient(30% 35% at 5% 80%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%);
+}
+.grad-text {
+  background: linear-gradient(95deg, var(--accent), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Section label, like a workspace tag: [01] ABOUT ---- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .7rem;
+  font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+}
+.eyebrow b { color: var(--accent); font-weight: 700; }
+.eyebrow b::before { content: "["; color: var(--muted); font-weight: 400; }
+.eyebrow b::after { content: "]"; color: var(--muted); font-weight: 400; }
+.eyebrow::after { content: ""; width: 3rem; height: 2px; background: linear-gradient(90deg, var(--accent), var(--gold)); }
+
+/* "Active window" border: orange to gold at 45deg, the Hyprland default look */
+.win { border: 2px solid var(--line); background: var(--surface); }
+.win-on, .win:hover, .win:focus-visible, .win:focus-within {
+  border-image: linear-gradient(45deg, var(--accent), var(--gold)) 1;
+}
+
+/* Buttons */
+.btn-solid, .btn-ghost {
+  display: inline-flex; align-items: center; gap: .6rem; padding: .75rem 1.25rem;
+  font-size: .8rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  border: 2px solid var(--accent); transition: background .15s, color .15s, border-color .15s;
+}
+.btn-solid { background: var(--accent); color: #0b0b0a; }
+.btn-solid:hover { background: transparent; color: var(--accent); }
+.btn-ghost { border-color: color-mix(in srgb, var(--fg) 40%, transparent); color: var(--fg); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-solid:active, .btn-ghost:active { background: var(--gold); border-color: var(--gold); color: #0b0b0a; }
+
+/* Status chip */
+.status-chip {
+  display: inline-flex; align-items: center; gap: .6rem; margin-bottom: 1.25rem;
+  border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  padding: .4rem .9rem; font-size: .75rem; letter-spacing: .04em;
+}
+
+/* Marquee ticker. Separator has equal space either side so the rhythm is even. */
+.tick { font-size: clamp(1.5rem, 3.4vw, 2.6rem); font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap; }
+.tick-out { color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 45%, transparent); }
+.tick-sep { display: block; flex: none; width: .6rem; height: .6rem; margin-inline: 1.6rem; }
+
+/* Chips and tags */
+.tag { padding: .2rem .6rem; font-size: .72rem; color: var(--muted);
+  border: 1px solid color-mix(in srgb, var(--dc, var(--fg)) 35%, transparent);
+  background: color-mix(in srgb, var(--dc, var(--fg)) 8%, transparent); }
+.skill-chip { transition: border-color .15s, background .15s; }
+.skill-chip:hover { border-color: var(--dc); background: color-mix(in srgb, var(--dc) 14%, transparent); }
+
+/* Work cards: tiled windows with a hard top band */
+.work-card {
+  position: relative; display: flex; flex-direction: column; overflow: hidden; padding: .4rem;
+  border: 2px solid var(--line); background: var(--surface);
+  transition: background .15s;
+}
+.work-card:hover { background: color-mix(in srgb, var(--dc) 6%, var(--surface)); }
+.work-band {
+  position: relative; overflow: hidden; height: 7.5rem; display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background:
+    radial-gradient(80% 140% at 100% 0%, color-mix(in srgb, var(--dc) 70%, transparent), transparent 65%),
+    linear-gradient(135deg, color-mix(in srgb, var(--dc) 22%, var(--bg)), color-mix(in srgb, var(--dc) 6%, var(--bg)));
+}
+/* Project drawings (see ProjectArt.tsx) */
+.art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.art * { vector-effect: non-scaling-stroke; }
+.art text { font: 600 11px var(--font-jb), ui-monospace, monospace; vector-effect: none; }
+.a-line { fill: none; stroke: var(--dc); stroke-width: 2; }
+.a-thick { stroke-width: 6; }
+.a-fg { fill: none; stroke: color-mix(in srgb, var(--fg) 55%, transparent); stroke-width: 1.5; }
+.a-solid { fill: var(--dc); }
+.a-ink { fill: var(--fg); }
+.a-dim { fill: color-mix(in srgb, var(--dc) 30%, transparent); stroke: var(--dc); stroke-width: 1.5; }
+.a-dim-flat { fill: color-mix(in srgb, var(--dc) 30%, transparent); }
+.a-band { fill: color-mix(in srgb, var(--dc) 22%, transparent); stroke: none; }
+.a-hatch { fill: none; stroke: var(--dc); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.a-txt { fill: var(--fg); }
+.a-txt-inv { fill: var(--bg); }
+.a-dimtxt { fill: color-mix(in srgb, var(--fg) 65%, transparent); font-weight: 500; }
+.a-dash { stroke-dasharray: 7 6; animation: a-dash 1.4s linear infinite; }
+.a-dash-slow { stroke-dasharray: 3 5; }
+@keyframes a-dash { to { stroke-dashoffset: -13; } }
+.a-scan { animation: a-scan 3.2s ease-in-out infinite alternate; }
+@keyframes a-scan { to { transform: translateY(124px); } }
+.a-truck { offset-rotate: 0deg; animation: a-drive 7s linear infinite; }
+@keyframes a-drive { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@media (prefers-reduced-motion: reduce) { .a-dash, .a-scan, .a-truck { animation: none; } }
+
+/* Case-study header: same backdrop as the card band, but sized to the page */
+.art-frame { position: relative; overflow: hidden; aspect-ratio: 9 / 4; margin-top: 2rem;
+  background:
+    radial-gradient(80% 140% at 100% 0%, color-mix(in srgb, var(--dc) 55%, transparent), transparent 65%),
+    linear-gradient(135deg, color-mix(in srgb, var(--dc) 20%, var(--bg)), color-mix(in srgb, var(--dc) 5%, var(--bg))); }
+.art-frame::before { content: ""; position: absolute; inset: 0; opacity: .5; pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--fg) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--fg) 12%, transparent) 1px, transparent 1px);
+  background-size: 20px 20px; }
+
+.round-ok { border-radius: 9999px !important; }
+
+.work-band::before {
+  content: ""; position: absolute; inset: 0; opacity: .55; pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--fg) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--fg) 14%, transparent) 1px, transparent 1px);
+  background-size: 14px 14px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000); mask-image: linear-gradient(90deg, transparent, #000);
+}
+.work-num { position: relative; font-size: 3.2rem; font-weight: 700; line-height: .8; letter-spacing: -.04em; color: color-mix(in srgb, var(--fg) 85%, transparent); }
+.work-kind { position: absolute; top: .75rem; left: 1.25rem; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+  padding: .3rem .6rem; background: var(--bg); color: var(--fg); border: 1px solid var(--dc); }
+.stat-val { color: var(--dc); }
+
+/* Small bordered cards (more projects, repos) */
+.mini-card { border: 2px solid var(--line); background: var(--surface); padding: 1.25rem;
+  box-shadow: inset 4px 0 0 var(--dc, var(--line)); transition: background .15s; }
+.mini-card:hover { background: color-mix(in srgb, var(--dc, var(--fg)) 6%, var(--surface)); }
+
+/* Experience rows */
+.xp-year { font-size: .72rem; padding: .2rem .6rem; white-space: nowrap;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent); color: var(--fg); }
+
+/* Contact panel: orange to gold fill, a second hard frame offset outside it */
+.cta-panel {
+  position: relative; padding: clamp(2rem, 6vw, 5rem);
+  color: #12120f;
+  background:
+    radial-gradient(60% 80% at 100% 0%, color-mix(in srgb, #fff4c2 70%, transparent), transparent 62%),
+    linear-gradient(135deg, #ff7a1a, #ffb020 70%, #ffc233);
+  outline: 2px solid var(--accent); outline-offset: 6px;
+}
+.cta-panel .btn-solid { background: #12120f; border-color: #12120f; color: #fff; }
+.cta-panel .btn-solid:hover { background: transparent; color: #12120f; }
+.cta-panel .btn-ghost { border-color: rgba(18,18,15,.55); color: #12120f; }
+.cta-panel .btn-ghost:hover { background: #12120f; border-color: #12120f; color: #fff; }
+
+/* Bar (top) links, like workspace buttons */
+.bar-link { display: inline-flex; gap: .45rem; padding: .3rem .6rem; font-size: .78rem; text-transform: lowercase; transition: background .15s, color .15s; }
+.bar-link i { font-style: normal; color: var(--accent); }
+.bar-link:hover { background: var(--accent); color: #0b0b0a; }
+.bar-link:hover i { color: #0b0b0a; }
 
 /* Film grain overlay: static. (It used to jitter, which exposed the screen edges and looked like flicker.) */
 .film-grain {

@@ -1,16 +1,20 @@
 // Infinite horizontal ticker. Content is duplicated so the loop is seamless.
+// Each item is "word + square", and the square has equal space on both sides.
+const seps = ["var(--accent)", "var(--gold)"];
+
 export default function Marquee({ items }: { items: string[] }) {
   const row = (hidden: boolean) => (
-    <ul className="flex shrink-0 items-center gap-10 pr-10" aria-hidden={hidden}>
-      {items.map((t) => (
-        <li key={t} className="whitespace-nowrap text-sm uppercase tracking-widest">
-          {t} <span className="text-accent">★</span>
+    <ul className="flex shrink-0 items-center" aria-hidden={hidden}>
+      {items.map((t, i) => (
+        <li key={t} className="flex items-center">
+          <span className={`tick ${i % 3 === 1 ? "tick-out" : ""}`}>{t}</span>
+          <span className="tick-sep" style={{ background: seps[i % seps.length] }} />
         </li>
       ))}
     </ul>
   );
   return (
-    <div className="marquee-wrap overflow-hidden border-y border-line py-4">
+    <div className="marquee-wrap overflow-hidden border-y-2 border-line py-6">
       <div className="marquee flex w-max">
         {row(false)}
         {row(true)}
