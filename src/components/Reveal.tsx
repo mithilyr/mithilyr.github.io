@@ -23,7 +23,9 @@ export default function Reveal({
           io.disconnect();
         }
       },
-      { threshold: 0.15 },
+      // A fixed share of the block (threshold) can never be reached on a phone when the block, like
+      // the Work section, is taller than several screens. So trigger on the first pixels instead.
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
