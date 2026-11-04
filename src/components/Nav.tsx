@@ -2,7 +2,14 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { site } from "@/content/site";
 
-const links = ["About", "Skills", "Experience", "Work", "Contact"];
+const links: [string, string][] = [
+  ["About", "about"],
+  ["Engineering", "engineering"],
+  ["Design", "design"],
+  ["Experience", "experience"],
+  ["Highlights", "highlights"],
+  ["Contact", "contact"],
+];
 
 // Status-bar style header: flat, full width, numbered "workspaces".
 export default function Nav() {
@@ -13,9 +20,9 @@ export default function Nav() {
           {site.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
         </Link>
         <ul className="hidden items-center gap-1 sm:flex">
-          {links.map((l, i) => (
+          {links.map(([l, id], i) => (
             <li key={l}>
-              <Link href={`/#${l.toLowerCase()}`} className="bar-link"><i>{i + 1}</i>{l}</Link>
+              <Link href={`/#${id}`} className="bar-link"><i>{i + 1}</i>{l}</Link>
             </li>
           ))}
         </ul>
@@ -29,9 +36,9 @@ export default function Nav() {
         </div>
       </nav>
       <ul className="nav-scroll flex gap-1 overflow-x-auto px-4 pb-2 sm:hidden">
-        {links.map((l, i) => (
+        {links.map(([l, id], i) => (
           <li key={l}>
-            <Link href={`/#${l.toLowerCase()}`} className="bar-link"><i>{i + 1}</i>{l}</Link>
+            <Link href={`/#${id}`} className="bar-link"><i>{i + 1}</i>{l}</Link>
           </li>
         ))}
       </ul>

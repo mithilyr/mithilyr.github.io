@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const ids = ["about", "skills", "experience", "work", "github", "contact"];
+const ids = ["about", "engineering", "design", "experience", "highlights", "contact"];
 
 // Fixed side dots that light up for the section in view. Desktop only.
 export default function SectionIndex() {

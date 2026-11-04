@@ -76,15 +76,26 @@ function Datathon() {
     <>
       <line className="a-fg" x1="250" y1={base} x2="590" y2={base} />
       {h.map((v, i) => (
-        <rect key={i} className={i < split ? "a-dim" : "a-hatch"} x={x0 + i * pitch} y={base - v} width={w} height={v} />
+        <rect
+          key={i}
+          className={`${i < split ? "a-dim" : "a-hatch"} a-bar`}
+          style={{ animationDelay: `${(i % 7) * 0.22}s` }}
+          x={x0 + i * pitch} y={base - v} width={w} height={v}
+        />
       ))}
       {/* forecast band over the last four weeks */}
       <polygon
-        className="a-band"
+        className="a-band a-pulse"
         points={`${x0 + split * pitch + w / 2},${top(split) - 10} ${x0 + 13 * pitch + w / 2},${top(13) - 22} ${x0 + 13 * pitch + w / 2},${top(13) + 14} ${x0 + split * pitch + w / 2},${top(split) + 6}`}
       />
       <polyline className="a-line" points={line} />
-      <line className="a-fg a-dash-slow" x1={x0 + split * pitch - 4} y1="34" x2={x0 + split * pitch - 4} y2={base} />
+      {/* the forecast part of the line keeps moving */}
+      <polyline
+        className="a-ink a-dash"
+        style={{ fill: "none", stroke: "var(--fg)", strokeWidth: 2 }}
+        points={h.slice(split).map((_, k) => `${x0 + (split + k) * pitch + w / 2},${top(split + k)}`).join(" ")}
+      />
+      <line className="a-fg a-dash" x1={x0 + split * pitch - 4} y1="34" x2={x0 + split * pitch - 4} y2={base} />
     </>
   );
 }
@@ -141,15 +152,22 @@ function Sponsor() {
         const gate = i === 2;
         return (
           <g key={s}>
-            <rect className={gate ? "a-solid" : "a-dim"} x={x} y="62" width="62" height="56" />
+            <rect className={`${gate ? "a-solid a-pulse" : "a-dim"}`} x={x} y="62" width="62" height="56" />
             <text className={`a-txt ${gate ? "a-txt-inv" : ""}`} x={x + 31} y="94" textAnchor="middle">{s}</text>
             {i < 3 && <polyline className="a-fg" points={`${x + 62},90 ${x + 90},90 ${x + 84},85 ${x + 90},90 ${x + 84},95`} />}
           </g>
         );
       })}
       <text className="a-txt a-dimtxt" x={250 + 2 * 90 + 31} y="52" textAnchor="middle">a person</text>
+      {/* a message moving through the pipeline */}
+      <rect className="a-solid a-packet" x="256" y="86" width="8" height="8" />
       {Array.from({ length: 17 }, (_, i) => (
-        <rect key={i} className={r() > 0.7 ? "a-solid" : "a-dim-flat"} x={250 + i * 20} y="146" width="12" height="12" />
+        <rect
+          key={i}
+          className={`${r() > 0.7 ? "a-solid" : "a-dim-flat"} a-blink`}
+          style={{ animationDelay: `${(i * 0.37) % 2}s` }}
+          x={250 + i * 20} y="146" width="12" height="12"
+        />
       ))}
     </>
   );
@@ -236,23 +254,54 @@ function Ember() {
   return (
     <>
       <rect className="a-fg" x="250" y="46" width="100" height="112" />
-      <polygon className="a-solid" points="300,150 276,132 282,110 294,120 292,92 308,66 312,96 328,108 326,132" />
-      <polygon className="a-ink" points="300,150 290,138 297,126 304,134 308,122 314,138" opacity=".85" />
-      <rect className="a-dim" x="360" y="46" width="100" height="50" />
+      <polygon className="a-solid a-flicker" points="300,150 276,132 282,110 294,120 292,92 308,66 312,96 328,108 326,132" />
+      <polygon className="a-ink a-flicker a-flicker-b" points="300,150 290,138 297,126 304,134 308,122 314,138" opacity=".85" />
+      <rect className="a-dim a-pulse" x="360" y="46" width="100" height="50" />
       <rect className="a-fg" x="470" y="46" width="110" height="50" />
-      <rect className="a-dim" x="360" y="108" width="160" height="50" />
+      <rect className="a-dim a-pulse" style={{ animationDelay: "1.2s" }} x="360" y="108" width="160" height="50" />
       <rect className="a-fg" x="528" y="108" width="52" height="50" />
       {[[534, 114], [562, 114], [534, 140]].map(([x, y]) => (
         <rect key={`${x}${y}`} className="a-solid" x={x} y={y} width="12" height="12" />
       ))}
-      {[[554, 128], [564, 138], [570, 148], [552, 148]].map(([x, y]) => (
-        <rect key={`${x}${y}`} className="a-ink" x={x} y={y} width="6" height="6" />
+      {[[554, 128], [564, 138], [570, 148], [552, 148]].map(([x, y], i) => (
+        <rect key={`${x}${y}`} className="a-ink a-blink" style={{ animationDelay: `${i * 0.45}s` }} x={x} y={y} width="6" height="6" />
       ))}
     </>
   );
 }
 
+// A browser window with a product page and an environmental score panel: five parameter bars and a leaf.
+function Avera() {
+  return (
+    <>
+      <rect className="a-fg" x="250" y="34" width="330" height="140" />
+      <rect className="a-dim" x="250" y="34" width="330" height="18" />
+      {[262, 274, 286].map((x) => (
+        <rect key={x} className="a-solid" x={x} y="40" width="6" height="6" />
+      ))}
+      {/* the product on the page */}
+      <rect className="a-dim" x="264" y="66" width="86" height="84" />
+      <polygon className="a-solid" points="284,138 307,92 330,138" />
+      <rect className="a-ink" x="264" y="156" width="56" height="6" opacity=".7" />
+      {/* the score panel */}
+      <rect className="a-fg" x="372" y="62" width="196" height="100" />
+      {[132, 104, 78, 96, 60].map((w, i) => (
+        <rect
+          key={i}
+          className={`${i === 1 ? "a-solid" : "a-dim"} a-bar`}
+          style={{ animationDelay: `${i * 0.3}s`, transformOrigin: "0% 50%", transformBox: "fill-box" }}
+          x="384" y={74 + i * 17} width={w} height="9"
+        />
+      ))}
+      {/* a leaf */}
+      <polygon className="a-solid a-pulse" points="540,70 556,78 552,96 536,100 530,84" />
+      <line className="a-line" x1="532" y1="100" x2="548" y2="82" />
+    </>
+  );
+}
+
 const art: Record<string, () => React.JSX.Element> = {
+  avera: Avera,
   "xai-research": Xai,
   "graph-rag": GraphRag,
   checkpoint: Checkpoint,

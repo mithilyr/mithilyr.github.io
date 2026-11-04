@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import Nav from "@/components/Nav";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorRing from "@/components/CursorRing";
 import BackToTop from "@/components/BackToTop";
-import FooterJelly from "@/components/FooterJelly";
+import SiteFooter from "@/components/SiteFooter";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+});
+
+// High-contrast serif with a calligraphic italic, used only for the Design & Publicity division.
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 const jetbrains = JetBrains_Mono({
@@ -29,7 +36,7 @@ const themeScript = `try{var t=localStorage.getItem("theme");if(t)document.docum
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrains.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
@@ -43,14 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Nav />
         {children}
         <BackToTop />
-        <footer className="relative flex min-h-[28rem] flex-col items-center sm:min-h-[34rem] justify-end overflow-hidden border-t-2 border-line px-4 pb-24 pt-8 text-center text-sm text-muted">
-          <FooterJelly />
-          <p className="relative bg-bg/80 px-3 py-1">
-            {site.name} · {site.location} ·{" "}
-            <a href={site.github} className="underline">GitHub</a> ·{" "}
-            <a href={site.linkedin} className="underline">LinkedIn</a>
-          </p>
-        </footer>
+        <SiteFooter />
       </body>
     </html>
   );

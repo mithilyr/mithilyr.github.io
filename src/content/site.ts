@@ -9,6 +9,8 @@ export const site = {
   github: "https://github.com/mithilyr",
   linkedin: "https://lk.linkedin.com/in/mithilrajapakse",
   resume: "/resume.pdf", // phone number removed; the button hides if this is empty
+  // from your earlier portfolio's footer
+  tagline: "Building systems that move, think, and, occasionally, get designed a poster.",
   // DRAFT, condensed from your LinkedIn summary
   photo: "/photo.png",
   about: [
@@ -61,7 +63,205 @@ export const certifications = [
   "Edexcel Advanced Subsidiary & Advanced Level",
 ];
 
-// From your CV and the repos above.
+// Real images for the project pages (files live in /public/projects/<slug>/).
+// They are screenshots and figures from your public repositories, and from the public live pages.
+// Projects with a private repository have none yet: drop files into public/projects/<slug>/ and list them here.
+export type Shot = { src: string; alt: string; caption: string; w: number; h: number };
+const shot = (slug: string, name: string, w: number, h: number, caption: string): Shot => ({
+  src: `/projects/${slug}/${name}.webp`, alt: caption, caption, w, h,
+});
+const shot2 = (name: string, w: number, h: number, caption: string): Shot => ({ src: `/highlights/${name}.webp`, alt: caption, caption, w, h });
+export const gallery: Record<string, { title: string; items: Shot[] }> = {
+  "solar-pv-designer": {
+    title: "Screenshots",
+    items: [
+      shot("solar-pv-designer", "banner", 1280, 640, "The project banner: a free Windows app with the PUCSL guideline checks built in."),
+      shot("solar-pv-designer", "roofs", 1200, 720, "Roofs tab: a panel grid you can import (CSV, Excel, AutoCAD DXF), build from dimensions, or edit cell by cell."),
+      shot("solar-pv-designer", "google-earth", 1200, 720, "Roof from dimensions: enter the roof face measured in Google Earth and the panel size, and the grid is built for you."),
+      shot("solar-pv-designer", "panels-inverters", 1200, 716, "Panels and inverters: pick a module and the app suggests string lengths and inverter combinations."),
+      shot("solar-pv-designer", "strings", 1200, 720, "String design: strings per inverter and MPPT, with a colour-coded string layout across the roof."),
+      shot("solar-pv-designer", "bom", 1200, 720, "Bill of materials with quantities you can edit, ready for Excel export."),
+      shot("solar-pv-designer", "bom-rules", 1200, 716, "BOM rules: the variables and formulas behind every quantity, editable so a company can use its own."),
+      shot("solar-pv-designer", "checks", 1200, 720, "Design checks against the PUCSL guideline, each shown as passed, warning or failed with its clause."),
+      shot("solar-pv-designer", "linkedin-post", 800, 1000, "The announcement post on LinkedIn."),
+    ],
+  },
+  "laya-lk-bench": {
+    title: "Figures from the study",
+    items: [
+      shot("laya-lk-bench", "macro-f1", 1600, 941, "Macro-F1 by language: English 0.72 against Sinhala 0.46."),
+      shot("laya-lk-bench", "confidently-wrong", 1600, 863, "Confidently wrong answers at 90%+ confidence: 0.3% of English posts against 24.5% of Sinhala."),
+      shot("laya-lk-bench", "reliability", 1594, 1015, "Reliability curves: how the model's confidence compares with its accuracy."),
+      shot("laya-lk-bench", "selective", 1482, 912, "Selective prediction: accuracy when the model is allowed to abstain."),
+      shot("laya-lk-bench", "fertility", 1548, 942, "Tokenizer fertility: how many tokens each language needs per word."),
+      shot("laya-lk-bench", "attribution", 1600, 870, "Explanation attribution: which tokens the model's explanations point to."),
+    ],
+  },
+  "graph-rag": {
+    title: "From the competition",
+    items: [
+      shot2("codefest-team", 575, 431, "Team Praxis with the trophy and certificates."),
+      shot2("codefest-cheque", 575, 431, "The 2nd place cheque for the AI Innovation Challenge."),
+      shot2("codefest-stage", 601, 401, "The 2nd place presentation on stage at SLIIT CodeFest 2026."),
+      shot2("ifs-workshop", 575, 767, "At the IFS workshop for the CodeFest top 10 teams."),
+    ],
+  },
+  "waypoint-delivery": {
+    title: "From the live demo",
+    items: [shot("waypoint-delivery", "sign-in", 1440, 900, "The sign-in page: one system, four roles (dispatcher, loader, driver, store manager).")],
+  },
+  ember: {
+    title: "From the live prototype",
+    items: [shot("ember", "hero", 1440, 900, "The Ember landing page for IEEE Day 2026.")],
+  },
+};
+
+// The "Design & Publicity" division: four collections of your Canva work (files in /public/design/<slug>/).
+// Wording is built from what the designs show and from your CV. Please read the captions and correct anything.
+export type DesignWork = { slug: string; tag: string; title: string; blurb: string; skills: string[]; items: Shot[] };
+const dshot = (slug: string, name: string, w: number, h: number, caption: string): Shot => ({
+  src: `/design/${slug}/${name}.webp`, alt: caption, caption, w, h,
+});
+export const design: DesignWork[] = [
+  {
+    slug: "ieee-publicity",
+    tag: "Technical and symposium publicity",
+    title: "IEEE chapter publicity",
+    blurb:
+      "Carousels, decks and announcements for the IEEE Student Branch of Curtin University Colombo, as founding Head of Public Relations: a guide to the IEEE societies, the membership presentation, and the branch's presence on Instagram, LinkedIn, YouTube and Facebook.",
+    skills: ["Canva", "Instagram", "YouTube", "Facebook"],
+    items: [
+      dshot("ieee-publicity", "ieee-societies-1", 1080, 1350, "Find Your IEEE Community: a swipe carousel introducing the six societies and affinity groups."),
+      dshot("ieee-publicity", "ieee-societies-2", 1080, 1350, "Society spotlight: the IEEE Technology and Engineering Management Society."),
+      dshot("ieee-publicity", "ieee-societies-3", 1080, 1350, "Society spotlight: the IEEE Robotics and Automation Society."),
+      dshot("ieee-publicity", "ieee-societies-4", 1080, 1350, "Society spotlight: the IEEE Aerospace and Electronic Systems Society."),
+      dshot("ieee-publicity", "ieee-deck-1", 1280, 720, "Cover of the introduction session for the IEEE Student Branch of Curtin University Colombo."),
+      dshot("ieee-publicity", "ieee-deck-2", 1280, 720, "From the membership presentation: where IEEE began (1884, 1912, 1963)."),
+    ],
+  },
+  {
+    slug: "student-guild",
+    tag: "Event and sponsorship design",
+    title: "Student Guild events and decks",
+    blurb:
+      "Decks, posters and applications for Curtin Colombo Student Guild events, including Eclipse 2025, the university's first Sports Meet, and the 2026 Executive Board application booklet. Part of the work around Unplugged 2024, which raised over LKR 1 million in sponsorships.",
+    skills: ["Canva", "Sponsorship proposals", "Event posters"],
+    items: [
+      dshot("student-guild", "eclipse-1", 1280, 720, "Eclipse 2025: the cover of the event deck for the university's first Sports Meet."),
+      dshot("student-guild", "eclipse-2", 1280, 720, "Eclipse 2025: the event overview (20 September 2025, Torrington Grounds, Colombo)."),
+      dshot("student-guild", "eclipse-3", 1280, 720, "Eclipse 2025: the target audience and the institutions taking part."),
+      dshot("student-guild", "ccsg-1", 1280, 720, "Curtin Colombo Student Guild 25/26: the cover slide."),
+      dshot("student-guild", "guild-1", 1280, 720, "The Executive Board 2026 application booklet: the cover."),
+      dshot("student-guild", "guild-2", 1280, 720, "The application booklet: the welcome letter to applicants."),
+    ],
+  },
+  {
+    slug: "cv-boost-booklet",
+    tag: "Event booklet",
+    title: "CV Boost delegate booklet",
+    blurb:
+      "The delegate booklet for CV Boost 2026, the IEEE Student Branch's career-readiness programme at Curtin University Colombo: welcome, event snapshot and outcomes in a clean programme guide. The same event the Route and Scan system was built for.",
+    skills: ["Canva", "Layout", "Event branding"],
+    items: [
+      dshot("cv-boost-booklet", "cvboost-1", 1280, 905, "The booklet cover: a three-phase career development programme."),
+      dshot("cv-boost-booklet", "cvboost-2", 1280, 905, "The welcome page: why CV Boost exists and who hosts it."),
+      dshot("cv-boost-booklet", "cvboost-3", 1280, 905, "The event snapshot: participants, phases, CVs submitted and reviewed, and industry partners."),
+      dshot("cv-boost-booklet", "cvboost-4", 1280, 905, "Five outcomes for delegates, from better CVs to stronger industry links."),
+    ],
+  },
+  {
+    slug: "clubs-and-merch",
+    tag: "Clubs, awards and house identity",
+    title: "Clubs, awards and house identity",
+    blurb:
+      "Award graphics for the Student Guild's Clubs Awards 2025, a teaser for a campus event, and the four House emblems (Ignis, Terra, Ventus and Nereus) for the Houses system created during the Guild presidency.",
+    skills: ["Canva", "Brand identity", "Social graphics"],
+    items: [
+      dshot("clubs-and-merch", "anime-1", 1080, 1350, "CCSG Clubs Awards 2025 Sem 01: the trophy graphic."),
+      dshot("clubs-and-merch", "anime-2", 1080, 1350, "CCSG Clubs Awards: the Best Club Award runners-up slide."),
+      dshot("clubs-and-merch", "halloween-1", 1080, 1080, "A teaser graphic for a Curtin Colombo campus event."),
+      dshot("clubs-and-merch", "housemerch-2", 1280, 720, "The four House emblems: Ignis, Terra, Ventus and Nereus."),
+    ],
+  },
+];
+
+// The "Highlights" section: things from your LinkedIn that aren't projects in a repo.
+// Photos are from your posts and the IEEE Student Branch's posts (files in /public/highlights/).
+const hshot = (name: string, w: number, h: number, caption: string): Shot => ({ src: `/highlights/${name}.webp`, alt: caption, caption, w, h });
+export type Highlight = { id: string; tag: string; title: string; blurb: string; points?: string[]; team?: string; href?: string; hrefLabel?: string; images?: Shot[] };
+export const highlights: Highlight[] = [
+  {
+    id: "codefest",
+    tag: "Competition · 2026",
+    title: "SLIIT CodeFest 2026: 2nd place",
+    blurb:
+      "Team Praxis finished as first runner-up in the AI Innovation Challenge, powered by IFS, among 58 teams from 13 universities. A team of four engineering students, up against many computing teams, and my first hackathon.",
+    points: [
+      "Build 1: cross-document knowledge retrieval, using OCR, a knowledge graph and deterministic breadth-first search that keeps every retrieval path.",
+      "Build 2: technician dispatch, using fuzzy request parsing, optimisation algorithms, recall-based rescheduling and LLM guardrails.",
+      "The rule behind both: use LLMs where language is messy, and deterministic algorithms where decisions matter.",
+    ],
+    team: "With Yasiru Fernando, Kenolee Wickramasuriya and Tatiana Armstrong",
+    href: "/work/graph-rag",
+    hrefLabel: "The graph-first RAG build",
+    images: [
+      hshot("codefest-team", 575, 431, "Team Praxis with the trophy and certificates."),
+      hshot("codefest-cheque", 575, 431, "The 2nd place cheque for the AI Innovation Challenge."),
+      hshot("codefest-stage", 601, 401, "The 2nd place presentation on stage at SLIIT CodeFest 2026."),
+      hshot("ifs-workshop", 575, 767, "At the IFS workshop for the CodeFest top 10 teams."),
+    ],
+  },
+  {
+    id: "sports-meet",
+    tag: "Student Guild · President 2024/25",
+    title: "The first Sports Meet, and the House logos",
+    blurb:
+      "My sign-off post as Student Guild President called this \"Curtin Colombo's biggest student project yet\": the official university House logos and titles, and Eclipse 2025, the first-ever Curtin University Sports Meet, with its house branding, structure and points systems.",
+    points: [
+      "Designed the official House logos and titles (Ignis, Terra, Ventus and Nereus).",
+      "Conceptualised and executed Eclipse 2025, the university's first Sports Meet, with house branding, structure and points systems.",
+      "Created the Curtin Colombo Sports Committee, plus the first Sports Tier List and a Sports-Man of the Month criteria.",
+      "Launched the first CCSG merch and sports merch, the first Clubs Awards and the first Guild magazine, and grew the Guild's Instagram by 200%+ since November 2024.",
+      "Reached out to Curtin Perth, Malaysia, Dubai and Singapore, and coordinated a grant from Curtin University Perth towards student clubs and sports.",
+    ],
+    team: "CCSG President 2024/25",
+    href: "/design/student-guild",
+    hrefLabel: "The Guild design work",
+    images: [
+      { src: "/design/student-guild/eclipse-1.webp", alt: "", caption: "Eclipse 2025: the cover of the event deck.", w: 1280, h: 720 },
+      { src: "/design/clubs-and-merch/housemerch-2.webp", alt: "", caption: "The four House emblems: Ignis, Terra, Ventus and Nereus.", w: 1280, h: 720 },
+      hshot("guild-flags", 575, 382, "The Guild team on the road, flags up."),
+      hshot("guild-team-evening", 959, 719, "The Guild team at an evening event."),
+      hshot("guild-team-campus", 575, 431, "The Guild team on campus."),
+      hshot("guild-laptops", 575, 392, "Members of the Guild at work on laptops."),
+    ].map((s) => ({ ...s, alt: s.alt || s.caption })),
+  },
+  {
+    id: "avera",
+    tag: "Hackathon · IEEE AI Driven Sri Lanka",
+    title: "Avera: a one-weekend Firefox extension",
+    blurb:
+      "Built in one weekend for the AI Challenge by IEEE AI Driven Sri Lanka: a browser extension that shows the environmental impact of a product before you buy it. Team of four, certificate of participation.",
+    team: "With Yasiru Fernando, Tatiana Armstrong and Sanindu Talwatte",
+    href: "/work/avera",
+    hrefLabel: "About Avera",
+  },
+  {
+    id: "gear-up",
+    tag: "IEEE Student Branch · Series",
+    title: "Gear Up: industry visits",
+    blurb:
+      "A series of industry visits for members of the IEEE Student Branch of Curtin University Colombo, including Atlas Labs, Colombo Dockyard PLC and IFS: step inside the workplace, meet the engineers, and see the work first-hand.",
+    images: [
+      hshot("gearup-ifs", 959, 719, "Gear Up Episode 05: the visit to IFS."),
+      hshot("gearup-dockyard", 575, 430, "Gear Up Episode 02: in the dry dock at Colombo Dockyard PLC."),
+      hshot("gearup-dockyard-talk", 575, 767, "Gear Up Episode 02: a session with the Colombo Dockyard PLC team."),
+      hshot("gearup-atlas", 575, 767, "Gear Up Episode 01: inside the Atlas Labs workspace."),
+    ],
+  },
+];
+
+// From your CV and the repos above. (The old all-in-one Skills section is gone: skills now sit under each project.)
 export const skills: Record<string, string[]> = {
   Languages: ["Python", "JavaScript", "C", "Assembly"],
   "AI & data": [
@@ -296,6 +496,25 @@ export const otherProjects = [
     domain: "ai" as Domain,
     line: "Built for the IFS challenge at SLIIT CODEFEST 2026: retrieval-augmented generation that tries graph retrieval first and falls back to vector search, with evidence-grounded answers and traceable provenance.",
     tags: ["Python", "Embeddings", "Graph retrieval", "LLM orchestration"],
+    stats: [
+      { value: "2nd", label: "place, SLIIT CodeFest 2026 AI Innovation Challenge" },
+      { value: "58", label: "teams from 13 universities" },
+      { value: "2", label: "systems built: retrieval and dispatch" },
+    ],
+    problem:
+      "IFS set the CodeFest AI challenge: build an assistant that understands a huge pile of documents, not one that only searches them. The questions need facts from different documents that share no wording. One document names a character's faction, a completely different one names the winner of an accord, and neither mentions the other. The answer only exists if you can connect the two.",
+    built: [
+      "A first baseline on purpose: semantic search that finds the most relevant-sounding passages and lets a model piece together the answer. It showed that similarity alone can't connect facts that share no words.",
+      "A graph-first retriever: OCR extracts the text, facts are structured into a knowledge graph, and deterministic breadth-first search follows the trail from fact to fact until it reaches an answer.",
+      "Provenance on every hop, so each answer shows where each piece of information came from.",
+      "A refusal path: when the trail runs out, the system says it doesn't know instead of guessing.",
+      "A second build for the dispatch phase: fuzzy request parsing, optimisation algorithms, recall-based rescheduling and LLM guardrails, so AI handles the ambiguity and deterministic algorithms make the decisions.",
+    ],
+    notes: [
+      "Team Praxis: Yasiru Fernando, Kenolee Wickramasuriya, Tatiana Armstrong and me. Four engineering students, my first hackathon.",
+      "Made the top 10 after the first phase, then took a physical workshop at IFS before the finals.",
+      "The principle that guided both builds: use LLMs where language is messy, and deterministic algorithms where decisions matter. We would rather say \"I don't know\" than hand over a confident, wrong answer.",
+    ],
   },
   {
     slug: "checkpoint",
@@ -303,6 +522,32 @@ export const otherProjects = [
     domain: "web" as Domain,
     line: "A full NFC and QR attendance system for university use: backend APIs, authentication, role-based access, and a data model for sessions, attendance, audits and room tracking.",
     tags: ["FastAPI", "SQLAlchemy", "PostgreSQL", "Docker", "Jinja2"],
+    built: [
+      "Attendance in one tap: students tap an NFC sticker by the door and the server verifies the rest. No app, no paper.",
+      "Live attendance for lecturers.",
+      "Clash-free rescheduling for admins.",
+      "A timetable that updates itself for students.",
+    ],
+    notes: [
+      "The pilot build is ready. Built with Tatiana Armstrong and Yasiru Fernando.",
+      "Looking for a lecturer or a university that wants to try it.",
+    ],
+  },
+  {
+    slug: "avera",
+    title: "Avera",
+    domain: "web" as Domain,
+    line: "A Firefox extension built in one weekend for the AI Challenge by IEEE AI Driven Sri Lanka: it shows the environmental impact of a product before you buy it, scoring the product page on parameters such as where it comes from, what it is made of and how long it lasts.",
+    tags: ["WXT", "React", "TypeScript", "Tailwind CSS", "LLM scoring"],
+    built: [
+      "A browser extension that reads product details from the e-commerce page you are on and scores them on five environmental parameters.",
+      "A hybrid engine: a fast, deterministic rules scorer, plus an LLM scorer meant to judge products when a page doesn't give enough information.",
+    ],
+    notes: [
+      "Built in one weekend by a team of four: Yasiru Fernando, Tatiana Armstrong, Sanindu Talwatte and me.",
+      "A submission to the AI Challenge organised by IEEE AI Driven Sri Lanka, with a certificate of participation. Built with the UN Sustainable Development Goals in mind.",
+      "It is a weekend build, so the scoring parameters are rough.",
+    ],
   },
   {
     slug: "ember",
