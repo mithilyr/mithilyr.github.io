@@ -122,8 +122,21 @@ body {
 
 /* "Active window" border: orange to gold at 45deg, the Hyprland default look */
 .win { border: 2px solid var(--line); background: var(--surface); }
-.win-on, .win:hover, .win:focus-visible, .win:focus-within {
+.win-on, .win:focus-visible, .win:focus-within {
   border-image: linear-gradient(45deg, var(--accent), var(--gold)) 1;
+}
+/* Hover effects only where there is a real hover (a tap on a phone would leave them stuck on) */
+@media (hover: hover) {
+  .win:hover { border-image: linear-gradient(45deg, var(--accent), var(--gold)) 1; }
+  .btn-solid:hover { background: transparent; color: var(--accent); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-chip:hover { border-color: var(--dc); background: color-mix(in srgb, var(--dc) 14%, transparent); }
+  .work-card:hover { background: color-mix(in srgb, var(--dc) 6%, var(--surface)); }
+  .mini-card:hover { background: color-mix(in srgb, var(--dc, var(--fg)) 6%, var(--surface)); }
+  .bar-link:hover { background: var(--accent); color: #0b0b0a; }
+  .bar-link:hover i { color: #0b0b0a; }
+  .cta-panel .btn-solid:hover { background: transparent; color: #12120f; }
+  .cta-panel .btn-ghost:hover { background: #12120f; border-color: #12120f; color: #fff; }
 }
 
 /* Buttons */
@@ -133,9 +146,7 @@ body {
   border: 2px solid var(--accent); transition: background .15s, color .15s, border-color .15s;
 }
 .btn-solid { background: var(--accent); color: #0b0b0a; }
-.btn-solid:hover { background: transparent; color: var(--accent); }
 .btn-ghost { border-color: color-mix(in srgb, var(--fg) 40%, transparent); color: var(--fg); }
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn-solid:active, .btn-ghost:active { background: var(--gold); border-color: var(--gold); color: #0b0b0a; }
 
 /* Status chip */
@@ -156,7 +167,6 @@ body {
   border: 1px solid color-mix(in srgb, var(--dc, var(--fg)) 35%, transparent);
   background: color-mix(in srgb, var(--dc, var(--fg)) 8%, transparent); }
 .skill-chip { transition: border-color .15s, background .15s; }
-.skill-chip:hover { border-color: var(--dc); background: color-mix(in srgb, var(--dc) 14%, transparent); }
 
 /* Work cards: tiled windows with a hard top band */
 .work-card {
@@ -164,7 +174,6 @@ body {
   border: 2px solid var(--line); background: var(--surface);
   transition: background .15s;
 }
-.work-card:hover { background: color-mix(in srgb, var(--dc) 6%, var(--surface)); }
 .work-band {
   position: relative; overflow: hidden; height: 7.5rem; display: flex; align-items: flex-end; justify-content: space-between;
   padding: 1rem 1.25rem;
@@ -226,7 +235,6 @@ body {
 /* Small bordered cards (more projects, repos) */
 .mini-card { border: 2px solid var(--line); background: var(--surface); padding: 1.25rem;
   box-shadow: inset 4px 0 0 var(--dc, var(--line)); transition: background .15s; }
-.mini-card:hover { background: color-mix(in srgb, var(--dc, var(--fg)) 6%, var(--surface)); }
 
 /* Experience rows */
 .xp-year { font-size: .72rem; padding: .2rem .6rem; white-space: nowrap;
@@ -243,15 +251,14 @@ body {
   outline: 2px solid var(--accent); outline-offset: 6px;
 }
 .cta-panel .btn-solid { background: #12120f; border-color: #12120f; color: #fff; }
-.cta-panel .btn-solid:hover { background: transparent; color: #12120f; }
 .cta-panel .btn-ghost { border-color: rgba(18,18,15,.55); color: #12120f; }
-.cta-panel .btn-ghost:hover { background: #12120f; border-color: #12120f; color: #fff; }
 
 /* Bar (top) links, like workspace buttons */
-.bar-link { display: inline-flex; gap: .45rem; padding: .3rem .6rem; font-size: .78rem; text-transform: lowercase; transition: background .15s, color .15s; }
+.bar-link { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.25rem; padding: .3rem .65rem; font-size: .78rem; text-transform: lowercase; white-space: nowrap; transition: background .15s, color .15s; }
 .bar-link i { font-style: normal; color: var(--accent); }
-.bar-link:hover { background: var(--accent); color: #0b0b0a; }
-.bar-link:hover i { color: #0b0b0a; }
+/* phone nav strip: scrolls sideways with no scrollbar, edge fades hint there is more */
+.nav-scroll { scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+.nav-scroll::-webkit-scrollbar { display: none; }
 
 /* Film grain overlay: static. (It used to jitter, which exposed the screen edges and looked like flicker.) */
 .film-grain {

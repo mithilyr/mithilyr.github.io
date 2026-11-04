@@ -36,7 +36,7 @@ export default function Home() {
             Open to internships and collaborations
           </p>
           <p className="text-sm uppercase tracking-widest text-muted">{site.location}</p>
-          <h1 className="mt-4 text-[min(13vw,8rem)] font-bold uppercase leading-[0.9]">
+          <h1 className="mt-4 text-[min(14.5vw,8rem)] font-bold uppercase leading-[0.9]">
             {first}
             <br />
             <span className="grad-text">{rest.join(" ")}</span>

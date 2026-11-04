@@ -28,7 +28,7 @@ export default function Nav() {
           )}
         </div>
       </nav>
-      <ul className="flex gap-1 overflow-x-auto px-4 pb-2 sm:hidden">
+      <ul className="nav-scroll flex gap-1 overflow-x-auto px-4 pb-2 sm:hidden">
         {links.map((l, i) => (
           <li key={l}>
             <Link href={`/#${l.toLowerCase()}`} className="bar-link"><i>{i + 1}</i>{l}</Link>

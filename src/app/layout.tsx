@@ -6,6 +6,7 @@ import Nav from "@/components/Nav";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorRing from "@/components/CursorRing";
 import BackToTop from "@/components/BackToTop";
+import FooterJelly from "@/components/FooterJelly";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -42,10 +43,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Nav />
         {children}
         <BackToTop />
-        <footer className="border-t-2 border-line px-4 pb-24 pt-8 text-center text-sm text-muted">
-          {site.name} · {site.location} ·{" "}
-          <a href={site.github} className="underline">GitHub</a> ·{" "}
-          <a href={site.linkedin} className="underline">LinkedIn</a>
+        <footer className="relative flex min-h-[28rem] flex-col items-center sm:min-h-[34rem] justify-end overflow-hidden border-t-2 border-line px-4 pb-24 pt-8 text-center text-sm text-muted">
+          <FooterJelly />
+          <p className="relative bg-bg/80 px-3 py-1">
+            {site.name} · {site.location} ·{" "}
+            <a href={site.github} className="underline">GitHub</a> ·{" "}
+            <a href={site.linkedin} className="underline">LinkedIn</a>
+          </p>
         </footer>
       </body>
     </html>
