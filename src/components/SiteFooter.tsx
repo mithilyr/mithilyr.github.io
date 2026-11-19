@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import FooterJelly from "./FooterJelly";
+import VisitorCount from "./VisitorCount";
 
 const menu = [
   ["Home", "/"],
@@ -48,9 +49,12 @@ export default function SiteFooter() {
           </div>
         </div>
         <div className="border-t-2 border-line">
-          <p className="mono mx-auto max-w-7xl px-4 py-4 pb-20 text-xs sm:pb-4">
+          <p className="mono mx-auto max-w-7xl px-4 pt-4 text-xs">
             &copy; 2026 {site.name}. All rights reserved.
           </p>
+          <div className="pb-20 pt-1 sm:pb-4">
+            <VisitorCount />
+          </div>
         </div>
       </div>
     </footer>
