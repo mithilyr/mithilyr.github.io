@@ -26,9 +26,11 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mithilyr.github.io"),
   title: { default: `${site.name} | Engineer`, template: `%s | ${site.name}` },
   description: site.pitch,
-  openGraph: { title: site.name, description: site.pitch, type: "website" },
+  openGraph: { title: site.name, description: site.pitch, type: "website", siteName: site.name },
+  twitter: { card: "summary_large_image", title: site.name, description: site.pitch },
 };
 
 // Sets the saved theme before paint to avoid a flash.
